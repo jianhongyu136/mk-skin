@@ -29,12 +29,13 @@ public class TextColorSkinHelper extends SkinHelper {
 
     @Override
     public void changeSkin() {
-        if (skinView != null)
-            if (skinView instanceof TextView) {
-                Drawable drawable = SkinUtil.getSkinDrawable(textColor);
-                if (drawable instanceof ColorDrawable) {
-                    ((TextView) skinView).setTextColor(((ColorDrawable) drawable).getColor());
-                }
+        if (skinView == null)
+            return;
+        if (skinView instanceof TextView) {
+            Drawable drawable = SkinUtil.getSkinDrawable(textColor);
+            if (drawable instanceof ColorDrawable) {
+                ((TextView) skinView).setTextColor(((ColorDrawable) drawable).getColor());
             }
+        }
     }
 }

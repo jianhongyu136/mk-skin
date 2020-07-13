@@ -34,13 +34,13 @@ public class ImageViewSkinHelper extends SkinHelper {
 
     @Override
     public void changeSkin() {
-        if (skinView != null) {
-            backgroundSkinHelper.changeSkin();
-            Drawable drawable = SkinUtil.getSkinDrawable(tintColor);
-            if (skinView instanceof ImageView && drawable instanceof ColorDrawable) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ((ImageView) skinView).setImageTintList(ColorStateList.valueOf(((ColorDrawable) drawable).getColor()));
-                }
+        if (skinView == null)
+            return;
+        backgroundSkinHelper.changeSkin();
+        Drawable drawable = SkinUtil.getSkinDrawable(tintColor);
+        if (skinView instanceof ImageView && drawable instanceof ColorDrawable) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                ((ImageView) skinView).setImageTintList(ColorStateList.valueOf(((ColorDrawable) drawable).getColor()));
             }
         }
     }

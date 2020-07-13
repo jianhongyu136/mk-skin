@@ -1,5 +1,6 @@
 package com.jhy.mkskin.skinhelper;
 
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,7 +20,7 @@ public class BackgroundSkinHelper extends SkinHelper {
     public BackgroundSkinHelper(@NonNull View skinView, AttributeSet attributeSet) {
         super(skinView, attributeSet);
         this.skinView = skinView;
-        if(attributeSet != null){
+        if (attributeSet != null) {
             backgroundColorKey = attributeSet.getAttributeResourceValue(null, "background", 0);
         }
         if (SkinUtil.isSkinNotEmpty())
@@ -28,7 +29,10 @@ public class BackgroundSkinHelper extends SkinHelper {
 
     @Override
     public void changeSkin() {
-        if (skinView != null)
-            skinView.setBackground(SkinUtil.getSkinDrawable(backgroundColorKey));
+        if (skinView == null)
+            return;
+        Drawable bg = SkinUtil.getSkinDrawable(backgroundColorKey);
+        if (bg != null)
+            skinView.setBackground(bg);
     }
 }
