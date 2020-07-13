@@ -26,7 +26,7 @@ public class ImageViewSkinHelper extends SkinHelper {
         backgroundSkinHelper = new BackgroundSkinHelper(skinView, attributeSet);
         this.skinView = skinView;
         if (attributeSet != null) {
-            tintColor = attributeSet.getAttributeResourceValue(null, "imageTintColor", 0);
+            tintColor = attributeSet.getAttributeResourceValue(null, "tint", 0);
         }
         if (SkinUtil.isSkinNotEmpty())
             changeSkin();
