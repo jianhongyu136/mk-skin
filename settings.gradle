@@ -1,0 +1,3 @@
+include ':app:mkskin'
+include ':app'
+rootProject.name = "mkskinlibrary"
