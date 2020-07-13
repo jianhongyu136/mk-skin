@@ -1,6 +1,10 @@
 package com.jhy.mkskin.skinview;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
+import android.net.Uri;
 import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
@@ -8,9 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.jhy.mkskin.SkinEnable;
-import com.jhy.mkskin.skinhelper.BackgroundSkinHelper;
 import com.jhy.mkskin.skinhelper.ImageViewSkinHelper;
-import com.jhy.mkskin.skinhelper.SkinHelper;
 
 public class SkinImageView extends AppCompatImageView implements SkinEnable {
 
@@ -29,9 +31,38 @@ public class SkinImageView extends AppCompatImageView implements SkinEnable {
         skinHelper = new ImageViewSkinHelper(this, attrs);
     }
 
-    @NonNull
     @Override
-    public SkinHelper[] getSkinHelpers() {
-        return new SkinHelper[]{skinHelper};
+    public void setImageBitmap(Bitmap bm) {
+        super.setImageBitmap(bm);
+        changeSkin();
+    }
+
+    @Override
+    public void setImageDrawable(@Nullable Drawable drawable) {
+        super.setImageDrawable(drawable);
+        changeSkin();
+    }
+
+    @Override
+    public void setImageResource(int resId) {
+        super.setImageResource(resId);
+        changeSkin();
+    }
+
+    @Override
+    public void setImageIcon(@Nullable Icon icon) {
+        super.setImageIcon(icon);
+        changeSkin();
+    }
+
+    @Override
+    public void setImageURI(@Nullable Uri uri) {
+        super.setImageURI(uri);
+        changeSkin();
+    }
+
+    @Override
+    public void changeSkin() {
+        skinHelper.changeSkin();
     }
 }

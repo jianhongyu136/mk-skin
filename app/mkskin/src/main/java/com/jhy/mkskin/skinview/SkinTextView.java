@@ -3,12 +3,10 @@ package com.jhy.mkskin.skinview;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.jhy.mkskin.SkinEnable;
-import com.jhy.mkskin.skinhelper.SkinHelper;
 import com.jhy.mkskin.skinhelper.TextViewSkinHelper;
 
 public class SkinTextView extends AppCompatTextView implements SkinEnable {
@@ -28,9 +26,8 @@ public class SkinTextView extends AppCompatTextView implements SkinEnable {
         skinHelper = new TextViewSkinHelper(this, attrs);
     }
 
-    @NonNull
     @Override
-    public SkinHelper[] getSkinHelpers() {
-        return new SkinHelper[]{skinHelper};
+    public void changeSkin() {
+        skinHelper.changeSkin();
     }
 }

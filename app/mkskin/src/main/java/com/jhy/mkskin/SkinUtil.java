@@ -14,8 +14,6 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
-import com.jhy.mkskin.skinhelper.SkinHelper;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -57,13 +55,10 @@ public class SkinUtil {
         if (view == null) return;
         view.destroyDrawingCache();
         if (view instanceof SkinEnable) {
-            SkinHelper[] skinHelpers = ((SkinEnable) view).getSkinHelpers();
-            for (SkinHelper skinHelper : skinHelpers) {
-                try {
-                    skinHelper.changeSkin();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            try {
+                ((SkinEnable) view).changeSkin();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             if (view instanceof ViewGroup) {
                 for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {

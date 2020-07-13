@@ -4,15 +4,12 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.jhy.mkskin.SkinEnable;
 import com.jhy.mkskin.skinhelper.BackgroundSkinHelper;
-import com.jhy.mkskin.skinhelper.SkinHelper;
 
-public
-class SkinView extends View implements SkinEnable {
+public class SkinView extends View implements SkinEnable {
     private final BackgroundSkinHelper skinHelper;
 
     public SkinView(Context context) {
@@ -28,9 +25,8 @@ class SkinView extends View implements SkinEnable {
         skinHelper = new BackgroundSkinHelper(this, attrs);
     }
 
-    @NonNull
     @Override
-    public SkinHelper[] getSkinHelpers() {
-        return new SkinHelper[]{skinHelper};
+    public void changeSkin() {
+        skinHelper.changeSkin();
     }
 }

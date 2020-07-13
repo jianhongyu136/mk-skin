@@ -3,7 +3,6 @@ package com.jhy.mkskin.skinhelper;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 

@@ -43,5 +43,6 @@ public class ImageViewSkinHelper extends SkinHelper {
                 ((ImageView) skinView).setImageTintList(ColorStateList.valueOf(((ColorDrawable) drawable).getColor()));
             }
         }
+
     }
 }

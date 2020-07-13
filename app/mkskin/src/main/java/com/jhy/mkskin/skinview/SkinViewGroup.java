@@ -4,11 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-
 import com.jhy.mkskin.SkinEnable;
 import com.jhy.mkskin.skinhelper.BackgroundSkinHelper;
-import com.jhy.mkskin.skinhelper.SkinHelper;
 
 public abstract class SkinViewGroup extends ViewGroup implements SkinEnable {
 
@@ -27,10 +24,8 @@ public abstract class SkinViewGroup extends ViewGroup implements SkinEnable {
         skinHelper = new BackgroundSkinHelper(this, attrs);
     }
 
-
-    @NonNull
     @Override
-    public SkinHelper[] getSkinHelpers() {
-        return new SkinHelper[]{skinHelper};
+    public void changeSkin() {
+        skinHelper.changeSkin();
     }
 }
