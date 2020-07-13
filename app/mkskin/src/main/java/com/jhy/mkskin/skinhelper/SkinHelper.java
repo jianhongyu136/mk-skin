@@ -14,7 +14,7 @@ import com.jhy.mkskin.SkinUtil;
  */
 public abstract class SkinHelper {
 
-    public SkinHelper(@NonNull View skinView, @NonNull AttributeSet attributeSet) {
+    public SkinHelper(@NonNull View skinView, AttributeSet attributeSet) {
 
     }
 

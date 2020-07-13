@@ -2,6 +2,7 @@ package com.jhy.mkskin.skinhelper;
 
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
@@ -15,11 +16,13 @@ public class BackgroundSkinHelper extends SkinHelper {
     private int backgroundColorKey;
     private View skinView;
 
-    public BackgroundSkinHelper(@NonNull View skinView, @NonNull AttributeSet attributeSet) {
+    public BackgroundSkinHelper(@NonNull View skinView, AttributeSet attributeSet) {
         super(skinView, attributeSet);
         this.skinView = skinView;
-        backgroundColorKey = attributeSet.getAttributeResourceValue(null, "background", 0);
-        if (SkinUtil.isSkinEmpty())
+        if(attributeSet != null){
+            backgroundColorKey = attributeSet.getAttributeResourceValue(null, "background", 0);
+        }
+        if (SkinUtil.isSkinNotEmpty())
             changeSkin();
     }
 

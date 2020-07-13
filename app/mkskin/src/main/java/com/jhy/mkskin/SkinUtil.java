@@ -59,7 +59,11 @@ public class SkinUtil {
         if (view instanceof SkinEnable) {
             SkinHelper[] skinHelpers = ((SkinEnable) view).getSkinHelpers();
             for (SkinHelper skinHelper : skinHelpers) {
-                skinHelper.changeSkin();
+                try {
+                    skinHelper.changeSkin();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             if (view instanceof ViewGroup) {
                 for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
@@ -105,7 +109,7 @@ public class SkinUtil {
         return drawable;
     }
 
-    public static boolean isSkinEmpty() {
+    public static boolean isSkinNotEmpty() {
         return !skinDrawableMap.isEmpty();
     }
 

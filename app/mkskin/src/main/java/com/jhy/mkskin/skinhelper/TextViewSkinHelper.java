@@ -16,7 +16,7 @@ public class TextViewSkinHelper extends SkinHelper {
         super(skinView, attributeSet);
         backgroundSkinHelper = new BackgroundSkinHelper(skinView, attributeSet);
         textColorSkinHelper = new TextColorSkinHelper(skinView, attributeSet);
-        if (SkinUtil.isSkinEmpty())
+        if (SkinUtil.isSkinNotEmpty())
             changeSkin();
     }
 

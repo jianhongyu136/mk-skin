@@ -18,11 +18,12 @@ public class TextColorSkinHelper extends SkinHelper {
     private int textColor;
     private View skinView;
 
-    public TextColorSkinHelper(@NonNull View skinView, @NonNull AttributeSet attributeSet) {
+    public TextColorSkinHelper(@NonNull View skinView, AttributeSet attributeSet) {
         super(skinView, attributeSet);
         this.skinView = skinView;
-        textColor = attributeSet.getAttributeResourceValue(null, "textColor", 0);
-        if (SkinUtil.isSkinEmpty())
+        if (attributeSet != null)
+            textColor = attributeSet.getAttributeResourceValue(null, "textColor", 0);
+        if (SkinUtil.isSkinNotEmpty())
             changeSkin();
     }
 
