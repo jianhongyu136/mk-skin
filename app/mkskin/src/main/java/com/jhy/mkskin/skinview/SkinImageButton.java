@@ -1,10 +1,6 @@
 package com.jhy.mkskin.skinview;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
-import android.net.Uri;
 import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;

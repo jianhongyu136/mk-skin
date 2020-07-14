@@ -1,56 +1,49 @@
 package com.jhy.mkskin;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.AttrRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import androidx.core.content.ContextCompat;
 
 /**
  * 皮肤切换工具类。
  */
 public class SkinUtil {
+
     private static final int[] STATE_NORMAL = {-android.R.attr.state_pressed};
     private static final int[] STATE_PRESSED = {android.R.attr.state_pressed};
     private static final int[] STATE_SELECTED = {android.R.attr.state_selected};
     private static final int[] STATE_DIS_ENABLED = {-android.R.attr.state_enabled};
-    /**
-     * 皮肤属性集，这里存放了所有皮肤的颜色值。
-     */
-    private static Map<Integer, Drawable> skinDrawableMap = new HashMap<>();
 
-    public static SkinSetter getSkinSetter() {
-        return new SkinSetter();
+    public static Integer getSkinValue(Context context, @AttrRes int attrID) {
+        if (context != null && attrID != 0) {
+            TypedValue typedValue = new TypedValue();
+            if (context.getTheme().resolveAttribute(attrID, typedValue, false)) {
+                return typedValue.data;
+            }
+        }
+        return null;
     }
 
-    /**
-     * 获取当前皮肤属性集中的某个属性颜色值。
-     *
-     * @param skinDrawableKey 皮肤属性名
-     * @return 当前皮肤属性集中指定属性名称的颜色
-     */
-    public static Drawable getSkinDrawable(@StringRes int skinDrawableKey) {
-        if (skinDrawableKey != 0 && skinDrawableMap != null && skinDrawableMap.containsKey(skinDrawableKey)) {
-            Drawable drawable = skinDrawableMap.get(skinDrawableKey);
-            if (drawable != null) {
-                Drawable.ConstantState constantState = drawable.getConstantState();
-                if (constantState != null) {
-                    drawable = constantState.newDrawable();
-                }
+    public static Drawable getSkinDrawable(Context context, @DrawableRes int drawableID) {
+        if (context != null && drawableID != 0) {
+            try {
+                return ContextCompat.getDrawable(context, drawableID);
+            } catch (Exception ignored) {
             }
-            return drawable;
         }
         return null;
     }
@@ -64,6 +57,7 @@ public class SkinUtil {
         if (view instanceof SkinEnable) {
             try {
                 ((SkinEnable) view).changeSkin();
+                view.invalidate();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -82,12 +76,11 @@ public class SkinUtil {
     }
 
     public static void applySkin(@NonNull Activity activity) {
-        Drawable statusColor = getSkinDrawable(R.string.skin_statusBarTextColor);
-        if (statusColor instanceof ColorDrawable)
-            changeStatusBarTextColor(activity, ((ColorDrawable) statusColor).getColor() == Color.BLACK);
-        Drawable navColor = getSkinDrawable(R.string.skin_navigationBarColor);
-        if (navColor instanceof ColorDrawable)
-            setNavigationBarColor(activity, ((ColorDrawable) navColor).getColor());
+        /*  Integer statusColor = getSkinValue(activity, R.attr.skin_statusBarTextColor);
+        changeStatusBarTextColor(activity, statusColor != null && statusColor == Color.BLACK);
+      Integer navColor = getSkinValue(activity, R.attr.skin_navigationBarColor);
+        if (navColor != null)
+            setNavigationBarColor(activity, navColor);*/
         View rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
         refreshView(rootView);
     }
@@ -111,9 +104,18 @@ public class SkinUtil {
         return drawable;
     }
 
-    public static boolean isSkinNotEmpty() {
-        return !skinDrawableMap.isEmpty();
+    public static ColorStateList createColorStateList(int normal, int pressed, int focused, int unable) {
+        int[] colors = new int[]{pressed, focused, normal, focused, unable, normal};
+        int[][] states = new int[6][];
+        states[0] = new int[]{android.R.attr.state_pressed, android.R.attr.state_enabled};
+        states[1] = new int[]{android.R.attr.state_enabled, android.R.attr.state_focused};
+        states[2] = new int[]{android.R.attr.state_enabled};
+        states[3] = new int[]{android.R.attr.state_focused};
+        states[4] = new int[]{android.R.attr.state_window_focused};
+        states[5] = new int[]{};
+        return new ColorStateList(states, colors);
     }
+
 
     public static void changeStatusBarTextColor(Activity activity, boolean isBlack) {
         Window window = activity.getWindow();
@@ -129,39 +131,5 @@ public class SkinUtil {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
 
-    }
-
-    public static class SkinSetter {
-
-        private SkinSetter() {
-        }
-
-        public void put(@StringRes int id, Drawable drawable) {
-            skinDrawableMap.put(id, drawable);
-        }
-
-        public void remove(@StringRes int id) {
-            skinDrawableMap.remove(id);
-        }
-
-        public boolean containsKey(@StringRes int id) {
-            return skinDrawableMap.containsKey(id);
-        }
-
-        public boolean isEmpty() {
-            return skinDrawableMap.isEmpty();
-        }
-
-        public boolean containsDrawable(Drawable drawable) {
-            return skinDrawableMap.containsValue(drawable);
-        }
-
-        public Set<Integer> keySet() {
-            return skinDrawableMap.keySet();
-        }
-
-        public void clearAll() {
-            skinDrawableMap.clear();
-        }
     }
 }
