@@ -63,6 +63,7 @@ public class SkinImageButton extends AppCompatImageButton implements SkinEnable 
 
     @Override
     public void changeSkin() {
-        skinHelper.changeSkin();
+        if (skinHelper != null)
+            skinHelper.changeSkin();
     }
 }

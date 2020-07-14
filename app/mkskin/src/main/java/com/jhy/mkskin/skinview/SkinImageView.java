@@ -63,6 +63,7 @@ public class SkinImageView extends AppCompatImageView implements SkinEnable {
 
     @Override
     public void changeSkin() {
-        skinHelper.changeSkin();
+        if (skinHelper != null)
+            skinHelper.changeSkin();
     }
 }

@@ -27,6 +27,7 @@ public class SkinView extends View implements SkinEnable {
 
     @Override
     public void changeSkin() {
-        skinHelper.changeSkin();
+        if (skinHelper != null)
+            skinHelper.changeSkin();
     }
 }

@@ -28,6 +28,7 @@ class SkinFrameLayout extends FrameLayout implements SkinEnable {
 
     @Override
     public void changeSkin() {
-        skinHelper.changeSkin();
+        if (skinHelper != null)
+            skinHelper.changeSkin();
     }
 }

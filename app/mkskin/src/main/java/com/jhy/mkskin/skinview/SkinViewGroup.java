@@ -26,6 +26,7 @@ public abstract class SkinViewGroup extends ViewGroup implements SkinEnable {
 
     @Override
     public void changeSkin() {
-        skinHelper.changeSkin();
+        if (skinHelper != null)
+            skinHelper.changeSkin();
     }
 }
