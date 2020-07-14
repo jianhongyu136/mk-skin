@@ -42,8 +42,15 @@ public class SkinUtil {
      * @return 当前皮肤属性集中指定属性名称的颜色
      */
     public static Drawable getSkinDrawable(@StringRes int skinDrawableKey) {
-        if (skinDrawableMap != null && skinDrawableMap.containsKey(skinDrawableKey)) {
-            return skinDrawableMap.get(skinDrawableKey);
+        if (skinDrawableKey != 0 && skinDrawableMap != null && skinDrawableMap.containsKey(skinDrawableKey)) {
+            Drawable drawable = skinDrawableMap.get(skinDrawableKey);
+           /* if (drawable != null) {
+                Drawable.ConstantState constantState = drawable.getConstantState();
+                if (constantState != null) {
+                    drawable = constantState.newDrawable();
+                }
+            }*/
+            return drawable;
         }
         return null;
     }

@@ -32,36 +32,6 @@ public class SkinImageView extends AppCompatImageView implements SkinEnable {
     }
 
     @Override
-    public void setImageBitmap(Bitmap bm) {
-        super.setImageBitmap(bm);
-        changeSkin();
-    }
-
-    @Override
-    public void setImageDrawable(@Nullable Drawable drawable) {
-        super.setImageDrawable(drawable);
-        changeSkin();
-    }
-
-    @Override
-    public void setImageResource(int resId) {
-        super.setImageResource(resId);
-        changeSkin();
-    }
-
-    @Override
-    public void setImageIcon(@Nullable Icon icon) {
-        super.setImageIcon(icon);
-        changeSkin();
-    }
-
-    @Override
-    public void setImageURI(@Nullable Uri uri) {
-        super.setImageURI(uri);
-        changeSkin();
-    }
-
-    @Override
     public void changeSkin() {
         if (skinHelper != null)
             skinHelper.changeSkin();
