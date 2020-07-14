@@ -38,18 +38,24 @@ public class DrawableTintSkinHelper extends SkinHelper {
             TextView textView = (TextView) skinView;
             Drawable drawable = SkinUtil.getSkinDrawable(drawableTint);
             if (drawable instanceof ColorDrawable) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    textView.setCompoundDrawableTintList(ColorStateList.valueOf(((ColorDrawable) drawable).getColor()));
-                } else {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        for (Drawable compoundDrawable : textView.getCompoundDrawables()) {
-                            compoundDrawable.setTint(((ColorDrawable) drawable).getColor());
-                        }
-                        for (Drawable compoundDrawable : textView.getCompoundDrawablesRelative()) {
-                            compoundDrawable.setTint(((ColorDrawable) drawable).getColor());
-                        }
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    textView.setCompoundDrawableTintList(ColorStateList.valueOf(((ColorDrawable) drawable).getColor()));
+//                } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    for (Drawable compoundDrawable : textView.getCompoundDrawables()) {
+                        compoundDrawable.setTint(((ColorDrawable) drawable).getColor());
+                    }
+                    for (Drawable compoundDrawable : textView.getCompoundDrawablesRelative()) {
+                        compoundDrawable.setTint(((ColorDrawable) drawable).getColor());
                     }
                 }
+                // }
+                skinView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        skinView.invalidate();
+                    }
+                });
             }
         }
     }
