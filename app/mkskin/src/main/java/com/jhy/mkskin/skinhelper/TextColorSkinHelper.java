@@ -1,41 +1,39 @@
 package com.jhy.mkskin.skinhelper;
 
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.jhy.mkskin.SkinUtil;
-
 /**
  * 实现控件背景颜色的切换。
  */
-public class TextColorSkinHelper extends SkinHelper {
+public class TextColorSkinHelper extends SkinHelper<TextView> {
 
     private int textColor;
-    private View skinView;
+    private int textColorHint;
 
-    public TextColorSkinHelper(@NonNull View skinView, AttributeSet attributeSet) {
+    public TextColorSkinHelper(@NonNull TextView skinView, AttributeSet attributeSet) {
         super(skinView, attributeSet);
-        this.skinView = skinView;
-        if (attributeSet != null)
-            textColor = attributeSet.getAttributeResourceValue(null, "textColor", 0);
-        if (SkinUtil.isSkinNotEmpty())
-            changeSkin();
+        if (attributeSet != null) {
+            textColor = getAttrResourceID(XMLN_ANDROID, "textColor");
+            textColorHint = getAttrResourceID(XMLN_ANDROID, "textColorHint");
+        }
     }
 
     @Override
     public void changeSkin() {
-        if (skinView == null)
+        TextView textView = getSkinView();
+        if (textView == null)
             return;
-        if (skinView instanceof TextView) {
-            Drawable drawable = SkinUtil.getSkinDrawable(textColor);
-            if (drawable instanceof ColorDrawable) {
-                ((TextView) skinView).setTextColor(((ColorDrawable) drawable).getColor());
-            }
+        Integer color = getSkinValue(textColor);
+        if (color != null) {
+            textView.setTextColor(color);
         }
+        color = getSkinValue(textColorHint);
+        if (color != null) {
+            textView.setHintTextColor(color);
+        }
+
     }
 }

@@ -3,37 +3,39 @@ package com.jhy.mkskin.skinhelper;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 
 /**
  * 实现控件背景颜色的切换。
  */
-public class ImageViewSkinHelper extends SkinHelper<ImageView> {
+public class ProgressTintSkinHelper extends SkinHelper<ProgressBar> {
 
     private final BackgroundSkinHelper backgroundSkinHelper;
-    private int tintColor;
+    private final View skinView;
+    private int progressTint;
 
-    public ImageViewSkinHelper(@NonNull ImageView skinView, AttributeSet attributeSet) {
+    public ProgressTintSkinHelper(@NonNull ProgressBar skinView, AttributeSet attributeSet) {
         super(skinView, attributeSet);
         backgroundSkinHelper = new BackgroundSkinHelper(skinView, attributeSet);
+        this.skinView = skinView;
         if (attributeSet != null) {
-            tintColor = getAttrResourceID(XMLN_ANDROID, "tint");
+            progressTint = getAttrResourceID(XMLN_ANDROID, "progressTint");
         }
     }
 
     @Override
     public void changeSkin() {
-        ImageView skinView = getSkinView();
         if (skinView == null)
             return;
         backgroundSkinHelper.changeSkin();
-        if (tintColor != 0) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Integer color = getSkinValue(tintColor);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (skinView instanceof ProgressBar) {
+                Integer color = getSkinValue(progressTint);
                 if (color != null) {
-                    skinView.setImageTintList(ColorStateList.valueOf(color));
+                    ((ProgressBar) skinView).setProgressTintList(ColorStateList.valueOf(color));
                 }
             }
         }
